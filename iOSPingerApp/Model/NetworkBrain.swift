@@ -54,6 +54,27 @@ struct NetworkBrain {
             }
         }
     }
+    
+    func getLastNumberOfAddress(ipAddress: String?) -> String {
+        if ipAddress == nil {
+            print("There seems to be an error with the passed ipAddress. It's value is NIL")
+            return ""
+        }
+        
+        var workingIpAddress = ipAddress
+        var numberOfDotsRemoved = 0
+        
+        while(true) {
+            if (workingIpAddress!.count > 0) && (numberOfDotsRemoved != 3) {
+                if workingIpAddress?.prefix(1) == "." {
+                    numberOfDotsRemoved += 1
+                }
+                workingIpAddress = String(workingIpAddress!.dropFirst())
+            } else {
+                return workingIpAddress!
+            }
+        }
+    }
 }
 
 

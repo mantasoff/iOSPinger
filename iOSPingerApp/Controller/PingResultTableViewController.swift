@@ -65,17 +65,17 @@ class PingResultTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem?.title = "Stop"
     }
     
-    private func setCellToReachable(pingResultTableViewCell: PingResultTableViewCell) {
+    private func setCellToReachable(_ pingResultTableViewCell: PingResultTableViewCell) {
         pingResultTableViewCell.statusLabel.text = "Reachable"
         pingResultTableViewCell.statusLabel.textColor = .green
     }
     
-    private func setCellToNotReachable(pingResultTableViewCell: PingResultTableViewCell) {
+    private func setCellToNotReachable(_ pingResultTableViewCell: PingResultTableViewCell) {
         pingResultTableViewCell.statusLabel.text = "Not Reachable"
         pingResultTableViewCell.statusLabel.textColor = .red
     }
     
-    private func setCellToLoading(pingResultTableViewCell: PingResultTableViewCell) {
+    private func setCellToLoading(_ pingResultTableViewCell: PingResultTableViewCell) {
         pingResultTableViewCell.statusLabel.text = "Loading..."
         pingResultTableViewCell.statusLabel.textColor = .yellow
     }
@@ -94,15 +94,15 @@ class PingResultTableViewController: UITableViewController {
         
         pingResultTableViewCell.ipAddressLabel.text = pingResult.getIpAddress()
         if pingResult.getIsConnected() {
-            setCellToReachable(pingResultTableViewCell: pingResultTableViewCell)
+            setCellToReachable(pingResultTableViewCell)
         } else if pingResult.getIsRunning() {
-            setCellToLoading(pingResultTableViewCell: pingResultTableViewCell)
+            setCellToLoading(pingResultTableViewCell)
         } else {
-            setCellToNotReachable(pingResultTableViewCell: pingResultTableViewCell)
+            setCellToNotReachable(pingResultTableViewCell)
         }
     }
     
-    private func reloadRowsByNumber(rowNumber: Int) {
+    private func reloadRowByNumber(rowNumber: Int) {
         DispatchQueue.main.async {
             let indexPath = NSIndexPath(item: rowNumber - 1, section: 0) as IndexPath
             self.tableView.reloadRows(at: [indexPath], with: .fade)
@@ -134,59 +134,14 @@ class PingResultTableViewController: UITableViewController {
             optionsViewController.setNumberOfThreads(numberOfThreads: pingBrain!.getAllowedNumberOfRunningEntries())
             optionsViewController.setNumberOfRetries(numberOfRetries: pingBrain!.getNumberOfRetries())
             optionsViewController.setTimeOutSeconds(timeOutSeconds: pingBrain!.getTimeoutSeconds())
+            optionsViewController.setPingResultTableViewController(pingResultTableViewController: self)
         }
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension PingResultTableViewController: onConnectionStatusChangedDelegate {
     func connectionStatusChanged(index: Int) {
-        reloadRowsByNumber(rowNumber: index)
+        reloadRowByNumber(rowNumber: index)
         setProgressBarValue(numberOfFinishedEntries: pingBrain!.getNumberOfFinishedEntries(), numberOfEntries: pingBrain!.getPingResultArrayCount())
         setProgressLabelValue(numberOfConnectedEntries: pingBrain!.getNumberOfConnectedEntries(), numberOfEntries: pingBrain!.getPingResultArrayCount())
     }

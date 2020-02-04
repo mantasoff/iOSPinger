@@ -10,6 +10,10 @@ import UIKit
 
 protocol onOptionsSave {
     func changeTheOptions(numberOfThreads: Int, numberOfRetries: Int, timeOutSecods: Int)
+    func buttonPressedSortPingResultArrayByReachabilityAscending()
+    func buttonPressedSortPingResultArrayByReachabilityDescending()
+    func buttonPressedSortPingResultArrayByIPAddressAscending()
+    func buttonPressedSortPingResultArrayByIPAddressDescending()
 }
 
 class OptionsViewController: UIViewController {
@@ -22,9 +26,12 @@ class OptionsViewController: UIViewController {
     @IBOutlet weak var numberOfRetriesStepper: UIStepper!
     @IBOutlet weak var timeoutSecondsStepper: UIStepper!
     
+    private var pingResultTableViewController: PingResultTableViewController?
     private var numberOfThreads: Int?
     private var numberOfRetries: Int?
     private var timeOutSeconds: Int?
+    private var needToReloadRows = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +57,30 @@ class OptionsViewController: UIViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         onOptionsSaved.changeTheOptions(numberOfThreads: numberOfThreads ?? 1, numberOfRetries: numberOfRetries ?? 1, timeOutSecods: timeOutSeconds ?? 1)
+        if needToReloadRows {
+            pingResultTableViewController?.tableView.reloadData()
+        }
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func sortByIPAscendingButtonPressed(_ sender: UIButton) {
+        needToReloadRows = true
+        onOptionsSaved.buttonPressedSortPingResultArrayByIPAddressAscending()
+    }
+    
+    @IBAction func sortByIPDescendingButtonPressed(_ sender: UIButton) {
+        needToReloadRows = true
+        onOptionsSaved.buttonPressedSortPingResultArrayByIPAddressDescending()
+    }
+    
+    @IBAction func sortByReachabilityAscendingButtonPressed(_ sender: UIButton) {
+        needToReloadRows = true
+        onOptionsSaved.buttonPressedSortPingResultArrayByReachabilityAscending()
+    }
+    
+    @IBAction func sortByReachabilityDescendingButtonPressed(_ sender: UIButton) {
+        needToReloadRows = true
+        onOptionsSaved.buttonPressedSortPingResultArrayByReachabilityDescending()
     }
     
     private func setInitialValues() {
@@ -82,5 +112,9 @@ class OptionsViewController: UIViewController {
     
     func setTimeOutSeconds(timeOutSeconds: Int) {
         self.timeOutSeconds = timeOutSeconds
+    }
+    
+    func setPingResultTableViewController(pingResultTableViewController: PingResultTableViewController) {
+        self.pingResultTableViewController = pingResultTableViewController
     }
 }

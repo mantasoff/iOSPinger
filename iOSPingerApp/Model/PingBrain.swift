@@ -41,29 +41,21 @@ class PingBrain{
         }
         
         let nextEntryToBeRan = nextEntryToRun
-        
         runPingOnPingResult(pingResult: pingResultArray![nextEntryToBeRan])
-        
         nextEntryToRun += 1
     }
     
     func isPossibleToRetryPing(pingResult: PingResult) -> Bool {
-        if pingResult.getTimesRan() < numberOfRetries {
-            return true
-        } else {
-            return false
-        }
+        return pingResult.getTimesRan() < numberOfRetries
     }
     
     func runPingOnPingResult(pingResult: PingResult) {
         if isStarted {
             pingResult.setIsRunning(isRunning: true)
-            
             pingResult.pingIpAddress()
         } else {
             print("Stopping Queue")
         }
-        
     }
     
     func generatePingResultArray() {
@@ -76,9 +68,45 @@ class PingBrain{
             i += 1
         }
     }
+    //================================ Sorting Functions
+    internal func sortPingResultArrayByReachabilityAscending() {
+        if pingResultArray != nil {
+            pingResultArray?.sort(by: { (PingResult1, PingResult2) -> Bool in
+                return PingResult1.getIsConnected()
+            })
+        }
+    }
     
-    func sortPingResultArrayByReachability() {
-        
+    internal func sortPingResultArrayByReachabilityDescending() {
+        if pingResultArray != nil {
+            pingResultArray?.sort(by: { (PingResult1, PingResult2) -> Bool in
+                return !PingResult1.getIsConnected()
+            })
+        }
+    }
+    
+    func sortPingResultArrayByIPAddressAscending() {
+        if pingResultArray != nil {
+            let networkBrain = NetworkBrain()
+            
+            pingResultArray?.sort(by: { (PingResult1, PingResult2) -> Bool in
+                let pingResult1LastNumberString = networkBrain.getLastNumberOfAddress(ipAddress: PingResult1.getIpAddress())
+                let pingResult2LastNumberString = networkBrain.getLastNumberOfAddress(ipAddress: PingResult2.getIpAddress())
+                return (Int(pingResult1LastNumberString) ?? -1) <= (Int(pingResult2LastNumberString) ?? -1)
+            })
+        }
+    }
+    
+    func sortPingResultArrayByIPAddressDescending() {
+        if pingResultArray != nil {
+            let networkBrain = NetworkBrain()
+            
+            pingResultArray?.sort(by: { (PingResult1, PingResult2) -> Bool in
+                let pingResult1LastNumberString = networkBrain.getLastNumberOfAddress(ipAddress: PingResult1.getIpAddress())
+                let pingResult2LastNumberString = networkBrain.getLastNumberOfAddress(ipAddress: PingResult2.getIpAddress())
+                return (Int(pingResult1LastNumberString) ?? -1) >= (Int(pingResult2LastNumberString) ?? -1)
+            })
+        }
     }
     
     //================================ Getters and setters
@@ -137,7 +165,6 @@ class PingBrain{
     func getPingResultIndexInPingResultArray(pingResult: PingResult) -> Int {
         return pingResultArray?.firstIndex(of: pingResult) ?? -1
     }
-    
 }
 
 //============================ Extension to make a call on the OptionViewController
@@ -146,5 +173,17 @@ extension PingBrain: onOptionsSave {
         allowedNumberOfRunningEntries = numberOfThreads
         self.numberOfRetries = numberOfRetries
         self.timeOutSeconds = timeOutSecods
+    }
+    func buttonPressedSortPingResultArrayByReachabilityAscending() {
+        sortPingResultArrayByReachabilityAscending()
+    }
+    func buttonPressedSortPingResultArrayByReachabilityDescending() {
+        sortPingResultArrayByReachabilityDescending()
+    }
+    func buttonPressedSortPingResultArrayByIPAddressAscending() {
+        sortPingResultArrayByIPAddressAscending()
+    }
+    func buttonPressedSortPingResultArrayByIPAddressDescending() {
+        sortPingResultArrayByIPAddressDescending()
     }
 }
