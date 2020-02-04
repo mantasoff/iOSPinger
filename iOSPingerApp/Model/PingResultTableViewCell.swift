@@ -10,6 +10,9 @@ import UIKit
 
 class PingResultTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
