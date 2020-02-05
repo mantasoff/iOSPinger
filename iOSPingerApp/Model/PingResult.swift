@@ -30,19 +30,20 @@ class PingResult : Equatable {
     }
     
     func pingIpAddress() {
-        if reachability == nil {
-            reachability = try? Reachability(hostname: ipAddress)
-        }
+        reachability = try? Reachability(hostname: ipAddress)
+        
         isRunning = true
         self.onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
         
         DispatchQueue.global().asyncAfter(deadline: .now() + Double(pingBrain.getTimeoutSeconds()), execute: {
             self.reachability?.whenReachable = { reachability in
                 self.updatePingResultConnection(isConnected: true)
+                reachability.stopNotifier()
             }
             
             self.reachability?.whenUnreachable = { reachability in
                 self.updatePingResultConnection(isConnected: false)
+                reachability.stopNotifier()
             }
             
             do {
@@ -53,11 +54,18 @@ class PingResult : Equatable {
         })
     }
     
+    func setDefault() {
+        isConnected = false
+        timesRan = 0
+        finishedRunning = false
+        isRunning = false
+    }
+    
     func updatePingResultConnection(isConnected: Bool) {
         self.isConnected = isConnected
         if self.isConnected {
             self.isRunning = false
-            self.pingBrain.runNextPingFromPingResult(pingResult: self)
+            self.pingBrain.runNextPing()
             self.pingBrain.addToNumberOfConnectedEntries()
         } else {
             self.timesRan += 1
@@ -66,8 +74,9 @@ class PingResult : Equatable {
                 return
             }
             self.isRunning = false
+            self.pingBrain.runNextPing()
         }
-        pingBrain.addToNumberOfFinishedEntries()
+        pingBrain.addToNumberOfFinishedEntriesAndSendNotification()
         onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
     }
     

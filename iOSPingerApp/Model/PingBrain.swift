@@ -11,38 +11,37 @@ import Reachability
 
 class PingBrain{
     private var pingResultArray: [PingResult]?
-    private var shouldStartRunning = true
-    private var numberOfRetries = 1 //  number of times when a ping is done an IP address if unsucssesful
+    private var numberOfRetries = 2 //  number of times when a ping is done an IP address if unsucssesful
     private var numberOfRunningEntries = 0
     private var allowedNumberOfRunningEntries = 100
-    private var nextEntryToRun = 0
     private var timeOutSeconds = 3;
     private var isStarted = false
+    private var isPaused = false
     private var numberOfFinishedEntries = 0
     private var numberOfConnectedEntries = 0
     
     func checkReachabilityOfPingResultArray() {
-        numberOfRunningEntries = 0
-        nextEntryToRun = allowedNumberOfRunningEntries
-        isStarted = true
-        for pingResult in pingResultArray! {
-            if numberOfRunningEntries >= allowedNumberOfRunningEntries {
-                return
-            }
-            numberOfRunningEntries += 1
-            runPingOnPingResult(pingResult: pingResult)
+        if pingResultArray == nil {
+            return
         }
-    }
-    
-    func runNextPingFromPingResult(pingResult: PingResult) {
-        //let lastRanPingResultIndex = pingResultArray?.firstIndex(of: pingResult)
-        if nextEntryToRun + 1 > pingResultArray!.count {
+        if pingResultArray?.count == 0 {
             return
         }
         
-        let nextEntryToBeRan = nextEntryToRun
+        numberOfRunningEntries = 0
+        isStarted = true
+        while (numberOfRunningEntries < allowedNumberOfRunningEntries) {
+            runPingOnPingResult(pingResult: pingResultArray![getNextReadyPingResultIndex()])
+            numberOfRunningEntries += 1
+        }
+    }
+    
+    func runNextPing() {
+        let nextEntryToBeRan = getNextReadyPingResultIndex()
+        if nextEntryToBeRan == -1 { // getNextReadyPingResultIndex() returns -1 if there are no more entries to be ran
+            return
+        }
         runPingOnPingResult(pingResult: pingResultArray![nextEntryToBeRan])
-        nextEntryToRun += 1
     }
     
     func isPossibleToRetryPing(pingResult: PingResult) -> Bool {
@@ -50,7 +49,7 @@ class PingBrain{
     }
     
     func runPingOnPingResult(pingResult: PingResult) {
-        if isStarted {
+        if isStarted && !isPaused {
             pingResult.setIsRunning(isRunning: true)
             pingResult.pingIpAddress()
         } else {
@@ -61,13 +60,29 @@ class PingBrain{
     func generatePingResultArray() {
         let networkBrain = NetworkBrain()
         pingResultArray = [] as [PingResult]
+        
         let initialIp = networkBrain.removeLastNumberOfAddress(ipAddress: networkBrain.getIPAddress())
+        if !(networkBrain.checkIfTheIPAddressIsReal(ipAddress: initialIp)) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "co.mancio.nointernetconnection"), object: nil)
+            return
+        }
+    
         var i = 0;
         while(i < 256) {        //An IP address ending can be from 0..255 inclusively, but 0 and 255 are rarely used
             pingResultArray! += [PingResult(ipAddress: initialIp + String(i), isConnected: false, pingBrain: self)]
             i += 1
         }
     }
+    
+    private func getNextReadyPingResultIndex() -> Int {
+        for pingResult in pingResultArray! {
+            if !pingResult.getIsConnected() && !pingResult.getIsRunning() && (pingResult.getTimesRan() < numberOfRetries) {
+                return getPingResultIndexInPingResultArray(pingResult: pingResult)
+            }
+        }
+        return -1
+    }
+    
     //================================ Sorting Functions
     internal func sortPingResultArrayByReachabilityAscending() {
         if pingResultArray != nil {
@@ -100,13 +115,23 @@ class PingBrain{
     func sortPingResultArrayByIPAddressDescending() {
         if pingResultArray != nil {
             let networkBrain = NetworkBrain()
-            
             pingResultArray?.sort(by: { (PingResult1, PingResult2) -> Bool in
                 let pingResult1LastNumberString = networkBrain.getLastNumberOfAddress(ipAddress: PingResult1.getIpAddress())
                 let pingResult2LastNumberString = networkBrain.getLastNumberOfAddress(ipAddress: PingResult2.getIpAddress())
                 return (Int(pingResult1LastNumberString) ?? -1) >= (Int(pingResult2LastNumberString) ?? -1)
             })
         }
+    }
+    
+    func setDefaults() {
+        for pingResult in pingResultArray! {
+            pingResult.setDefault()
+        }
+        numberOfRunningEntries = 0
+        isStarted = false
+        isPaused = false
+        numberOfFinishedEntries = 0
+        numberOfConnectedEntries = 0
     }
     
     //================================ Getters and setters
@@ -118,8 +143,12 @@ class PingBrain{
         return isStarted
     }
     
-    func addToNumberOfFinishedEntries() {
+    func addToNumberOfFinishedEntriesAndSendNotification() {
         numberOfFinishedEntries += 1
+        if numberOfFinishedEntries == pingResultArray!.count {
+            isStarted = false
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "co.mancio.pingsarefinished"), object: nil)
+        }
     }
     
     func getNumberOfFinishedEntries() -> Int {
@@ -164,6 +193,14 @@ class PingBrain{
     
     func getPingResultIndexInPingResultArray(pingResult: PingResult) -> Int {
         return pingResultArray?.firstIndex(of: pingResult) ?? -1
+    }
+    
+    func getIsPaused() -> Bool {
+        return isPaused
+    }
+    
+    func setIsPaused(isPaused: Bool) {
+        self.isPaused = isPaused
     }
 }
 

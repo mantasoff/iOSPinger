@@ -15,12 +15,13 @@ class PingResultTableViewController: UITableViewController {
     private var pingBrain: PingBrain?
     
     override func viewDidLoad() {
+        setObservers()
         setupPingBrain()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(optionsBarButtonPressed))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Start", style: .plain, target: self, action: #selector(leftBarButtonPressed))
         super.viewDidLoad()
     }
-
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,13 +44,22 @@ class PingResultTableViewController: UITableViewController {
       
     //==================================================== Button Action functions
     @objc func leftBarButtonPressed() {
-        if pingBrain!.getIsStarted() {
-            setLeftNavigationButtonToStart()
-            pingBrain?.stopPinging()
-        } else {
-            setLeftNavigationButtonToStop()
+        if navigationItem.leftBarButtonItem?.title == "Start" {
             pingBrain?.checkReachabilityOfPingResultArray()
         }
+        if navigationItem.leftBarButtonItem?.title == "Pause" {
+            pingBrain?.setIsPaused(isPaused: true)
+        }
+        if navigationItem.leftBarButtonItem?.title == "Continue" {
+            pingBrain?.setIsPaused(isPaused: false)
+            pingBrain?.checkReachabilityOfPingResultArray()
+        }
+        if navigationItem.leftBarButtonItem?.title == "Restart" {
+            pingBrain?.setDefaults()
+            tableView.reloadData()
+            pingBrain?.checkReachabilityOfPingResultArray()
+        }
+        setLeftNavigationButtonAppearance()
     }
     
     @objc func optionsBarButtonPressed() {
@@ -61,8 +71,16 @@ class PingResultTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem?.title = "Start"
     }
     
-    private func setLeftNavigationButtonToStop() {
-        navigationItem.leftBarButtonItem?.title = "Stop"
+    private func setLeftNavigationButtonToPause() {
+        navigationItem.leftBarButtonItem?.title = "Pause"
+    }
+    
+    private func setLeftNavigationButtonToContinue() {
+        navigationItem.leftBarButtonItem?.title = "Continue"
+    }
+    
+    private func setLeftNavigationButtonToRestart() {
+        navigationItem.leftBarButtonItem?.title = "Restart"
     }
     
     private func setCellToReachable(_ pingResultTableViewCell: PingResultTableViewCell) {
@@ -77,7 +95,7 @@ class PingResultTableViewController: UITableViewController {
     
     private func setCellToLoading(_ pingResultTableViewCell: PingResultTableViewCell) {
         pingResultTableViewCell.statusLabel.text = "Loading..."
-        pingResultTableViewCell.statusLabel.textColor = .yellow
+        pingResultTableViewCell.statusLabel.textColor = .orange
     }
     
     private func setProgressBarValue(numberOfFinishedEntries: Int, numberOfEntries: Int) {
@@ -102,6 +120,26 @@ class PingResultTableViewController: UITableViewController {
         }
     }
     
+    private func setLeftNavigationButtonAppearance() {
+        if pingBrain == nil {
+            print("PingBrain seems to be not initialized")
+            return
+        }
+        
+        if pingBrain!.getIsStarted() && pingBrain!.getIsPaused() {
+            setLeftNavigationButtonToContinue()
+        }
+        if pingBrain!.getIsStarted() && !pingBrain!.getIsPaused() {
+            setLeftNavigationButtonToPause()
+        }
+        if pingBrain!.getPingResultArrayCount() == pingBrain?.getNumberOfFinishedEntries() {
+            setLeftNavigationButtonToRestart()
+        }
+        if !pingBrain!.getIsStarted() && (pingBrain?.getNumberOfFinishedEntries() == 0) {
+            setLeftNavigationButtonToStart()
+        }
+    }
+    
     private func reloadRowByNumber(rowNumber: Int) {
         DispatchQueue.main.async {
             let indexPath = NSIndexPath(item: rowNumber - 1, section: 0) as IndexPath
@@ -109,6 +147,21 @@ class PingResultTableViewController: UITableViewController {
         }
     }
     
+    //================================================ Notification Observers
+    private func setObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setPingsFinished), name: NSNotification.Name(rawValue: "co.mancio.pingsarefinished"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNoInternetConnection), name: NSNotification.Name(rawValue: "co.mancio.nointernetconnection"), object: nil)
+    }
+    
+    //================================================ Notification Observer Functions
+    @objc private func setPingsFinished() {
+        setLeftNavigationButtonAppearance()
+    }
+    
+    @objc private func setNoInternetConnection() {
+        progressLabel.text = "Please Check Your Connection"
+    }
+
     //================================================ Setup functions
     private func setOnConnectionStatusChangedExtensionOnPingResultArray(pingResultArray: [PingResult]) {
         for pingResult in pingResultArray {

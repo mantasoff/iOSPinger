@@ -35,6 +35,7 @@ struct NetworkBrain {
             }
             freeifaddrs(ifaddr)
         }
+        
         return address ?? ""
     }
     
@@ -43,7 +44,6 @@ struct NetworkBrain {
             print("There seems to be an error with the passed ipAddress. It's value is NIL")
             return ""
         }
-        
         var workingIpAddress = ipAddress
         
         while(true) {
@@ -74,6 +74,16 @@ struct NetworkBrain {
                 return workingIpAddress!
             }
         }
+    }
+    
+    func checkIfTheIPAddressIsReal(ipAddress: String) -> Bool {
+        var dotCounter = 0
+        for char in ipAddress {
+            if char == "." {
+                dotCounter += 1
+            }
+        }
+        return dotCounter == 3
     }
 }
 
