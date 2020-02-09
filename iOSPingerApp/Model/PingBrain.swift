@@ -68,7 +68,7 @@ class PingBrain{
         }
     
         var i = 0;
-        while(i < 260) {        //An IP address ending can be from 0..255 inclusively, but 0 and 255 are rarely used
+        while(i < 255) {        //An IP address ending can be from 0..255 inclusively, but 0 and 255 are rarely used
             pingResultArray! += [PingResult(ipAddress: initialIp + String(i), isConnected: false, pingBrain: self)]
             i += 1
         }

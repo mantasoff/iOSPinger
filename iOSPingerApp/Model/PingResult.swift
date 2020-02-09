@@ -37,7 +37,6 @@ class PingResult : Equatable {
         self.onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
         
         self.reachability?.whenReachable = { reachability in
-            print(reachability.description)
             self.updatePingResultConnection(isConnected: true)
             reachability.stopNotifier()
         }
