@@ -17,7 +17,7 @@ protocol onOptionsSave {
 }
 
 class OptionsViewController: UIViewController {
-    var onOptionsSaved: onOptionsSave!
+    
     @IBOutlet weak var numberOfThreadsLabel: UILabel!
     @IBOutlet weak var numberOfRetriesLabel: UILabel!
     @IBOutlet weak var timeoutSecondsLabel: UILabel!
@@ -31,7 +31,7 @@ class OptionsViewController: UIViewController {
     private var numberOfRetries: Int?
     private var timeOutSeconds: Int?
     private var needToReloadRows = false
-    
+    var onOptionsSaved: onOptionsSave!
     
     override func viewDidLoad() {
         super.viewDidLoad()

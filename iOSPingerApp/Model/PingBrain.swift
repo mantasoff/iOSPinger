@@ -13,7 +13,7 @@ class PingBrain{
     private var pingResultArray: [PingResult]?
     private var numberOfRetries = 2 //  number of times when a ping is done an IP address if unsucssesful
     private var numberOfRunningEntries = 0
-    private var allowedNumberOfRunningEntries = 100
+    private var allowedNumberOfRunningEntries = 3
     private var timeOutSeconds = 3;
     private var isStarted = false
     private var isPaused = false
@@ -30,7 +30,7 @@ class PingBrain{
         
         numberOfRunningEntries = 0
         isStarted = true
-        while (numberOfRunningEntries < allowedNumberOfRunningEntries) {
+        while (numberOfRunningEntries < allowedNumberOfRunningEntries && (pingResultArray!.count > numberOfRunningEntries)) {
             runPingOnPingResult(pingResult: pingResultArray![getNextReadyPingResultIndex()])
             numberOfRunningEntries += 1
         }
@@ -68,7 +68,7 @@ class PingBrain{
         }
     
         var i = 0;
-        while(i < 256) {        //An IP address ending can be from 0..255 inclusively, but 0 and 255 are rarely used
+        while(i < 260) {        //An IP address ending can be from 0..255 inclusively, but 0 and 255 are rarely used
             pingResultArray! += [PingResult(ipAddress: initialIp + String(i), isConnected: false, pingBrain: self)]
             i += 1
         }
@@ -201,6 +201,14 @@ class PingBrain{
     
     func setIsPaused(isPaused: Bool) {
         self.isPaused = isPaused
+    }
+    
+    func setPingResultIpAddressByIndex(index: Int, ipAddress: String) {
+        if pingResultArray == nil {
+            return
+        }
+        
+        pingResultArray![index].setIpAddress(ipAddress: ipAddress)
     }
 }
 

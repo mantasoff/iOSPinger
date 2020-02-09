@@ -43,6 +43,9 @@ class PingResultTableViewController: UITableViewController {
     }
       
     //==================================================== Button Action functions
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "backToIntro", sender: self)
+    }
     @objc func leftBarButtonPressed() {
         if navigationItem.leftBarButtonItem?.title == "Start" {
             pingBrain?.checkReachabilityOfPingResultArray()

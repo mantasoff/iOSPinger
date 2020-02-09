@@ -31,21 +31,23 @@ class PingResult : Equatable {
     
     func pingIpAddress() {
         reachability = try? Reachability(hostname: ipAddress)
-        
+        reachability?.allowsCellularConnection = false
+
         isRunning = true
         self.onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
         
+        self.reachability?.whenReachable = { reachability in
+            print(reachability.description)
+            self.updatePingResultConnection(isConnected: true)
+            reachability.stopNotifier()
+        }
+        
+        self.reachability?.whenUnreachable = { reachability in
+            self.updatePingResultConnection(isConnected: false)
+            reachability.stopNotifier()
+        }
+        
         DispatchQueue.global().asyncAfter(deadline: .now() + Double(pingBrain.getTimeoutSeconds()), execute: {
-            self.reachability?.whenReachable = { reachability in
-                self.updatePingResultConnection(isConnected: true)
-                reachability.stopNotifier()
-            }
-            
-            self.reachability?.whenUnreachable = { reachability in
-                self.updatePingResultConnection(isConnected: false)
-                reachability.stopNotifier()
-            }
-            
             do {
                 try self.reachability?.startNotifier()
             } catch  {
@@ -107,5 +109,9 @@ class PingResult : Equatable {
     
     func getIpAddress() -> String {
         return ipAddress
+    }
+    
+    func setIpAddress(ipAddress: String) {
+        self.ipAddress = ipAddress
     }
 }

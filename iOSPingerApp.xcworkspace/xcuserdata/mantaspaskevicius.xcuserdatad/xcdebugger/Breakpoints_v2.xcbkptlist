@@ -14,8 +14,8 @@
             filePath = "iOSPingerApp/Model/PingResult.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "updatePingResultConnection(isConnected:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -32,8 +32,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "185"
             endingLineNumber = "185"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
+            landmarkName = "PingResultTableViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -48,8 +48,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "195"
             endingLineNumber = "195"
-            landmarkName = "PingResultTableViewController"
-            landmarkType = "21">
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -112,8 +112,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "158"
             endingLineNumber = "158"
-            landmarkName = "setPingsFinished()"
-            landmarkType = "7">
+            landmarkName = "PingResultTableViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -190,8 +190,8 @@
             filePath = "iOSPingerApp/Model/PingResult.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "pingIpAddress()"
             landmarkType = "7">
             <Locations>
@@ -248,7 +248,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "74C1EA8C-8A7D-4786-9B96-609AED24EAD2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOSPingerApp/Model/PingResult.swift"
@@ -270,42 +270,10 @@
             filePath = "iOSPingerApp/Model/PingResult.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "pingIpAddress()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CFA8D444-CF14-453F-A56A-4C8DFB436391 - 2d654e9b73c0660d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in iOSPingerApp.PingResult.pingIpAddress() -&gt; ()"
-                  moduleName = "iOSPingerApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Model/PingResult.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "91">
-               </Location>
-               <Location
-                  uuid = "CFA8D444-CF14-453F-A56A-4C8DFB436391 - ee0e421fb74f3b9f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Reachability.Reachability) -&gt; () in closure #1 () -&gt; () in iOSPingerApp.PingResult.pingIpAddress() -&gt; ()"
-                  moduleName = "iOSPingerApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Model/PingResult.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "34">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -321,6 +289,194 @@
             startingLineNumber = "65"
             endingLineNumber = "65"
             landmarkName = "generatePingResultArray()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSPingerApp/Controller/SinglePingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "SinglePingViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0 - 810556919285d138"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOSPingerApp.SinglePingViewController.ipAddressTextField.getter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "iOSPingerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Controller/SinglePingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0 - 5b8e752ae1a36904"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOSPingerApp.SinglePingViewController.ipAddressTextField.setter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "iOSPingerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Controller/SinglePingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0 - 266681f2b00af731"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOSPingerApp.SinglePingViewController.ipAddressTextField.modify : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "iOSPingerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Controller/SinglePingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0 - 92d7438ad4228d63"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOSPingerApp.SinglePingViewController.ipAddressTextField.modify : Swift.Optional&lt;__C.UITextField&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "iOSPingerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Controller/SinglePingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0 - 92c5501f598807a9"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOSPingerApp.SinglePingViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; iOSPingerApp.SinglePingViewController"
+                  moduleName = "iOSPingerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Controller/SinglePingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "182">
+               </Location>
+               <Location
+                  uuid = "4BC6B09E-CBAE-4314-A777-02837CD845E0 - 48ce6262312189d2"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOSPingerApp.SinglePingViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;iOSPingerApp.SinglePingViewController&gt;"
+                  moduleName = "iOSPingerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mantaspaskevicius/Development/xcode/iOSPingerApp/iOSPingerApp/Controller/SinglePingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "119">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6624BF3B-68B6-4CD5-A050-1CA87B0D2649"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSPingerApp/Controller/SinglePingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "setReachabilityLabelAppearance()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EE64E12D-E630-4576-9DB6-346729AE9DEB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSPingerApp/Model/PingResult.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "updatePingResultConnection(isConnected:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEA8679C-B3B9-48A8-92BC-CE3DEDC8CD08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSPingerApp/Model/PingResult.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "pingIpAddress()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C887430-75D2-410F-9965-1342C5AB0B8C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSPingerApp/Controller/SinglePingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "pingButtonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6AB9652F-2B9C-4634-A554-5A0BADF035E8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOSPingerApp/Model/PingResult.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "pingIpAddress()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

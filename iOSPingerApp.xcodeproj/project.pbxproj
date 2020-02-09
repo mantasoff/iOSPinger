@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1756596C15C630E08346DF00 /* Pods_iOSPingerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D4DBB3CCE7F20C7F653C63 /* Pods_iOSPingerApp.framework */; };
+		AB27649023EF640F0054DEBC /* IntroScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27648F23EF640F0054DEBC /* IntroScreenViewController.swift */; };
+		AB27649223EF679D0054DEBC /* SinglePingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB27649123EF679D0054DEBC /* SinglePingViewController.swift */; };
 		AB316C7423E3447400FB9D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB316C7323E3447400FB9D93 /* AppDelegate.swift */; };
 		AB316C7623E3447400FB9D93 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB316C7523E3447400FB9D93 /* SceneDelegate.swift */; };
 		AB316C7B23E3447400FB9D93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB316C7923E3447400FB9D93 /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 		47D4DBB3CCE7F20C7F653C63 /* Pods_iOSPingerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSPingerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53B121AE530E322EE230AFF3 /* Pods-iOSPingerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSPingerApp.debug.xcconfig"; path = "Target Support Files/Pods-iOSPingerApp/Pods-iOSPingerApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5C8BE5F7EBA8D6C699DF0B1A /* Pods-iOSPingerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSPingerApp.release.xcconfig"; path = "Target Support Files/Pods-iOSPingerApp/Pods-iOSPingerApp.release.xcconfig"; sourceTree = "<group>"; };
+		AB27648F23EF640F0054DEBC /* IntroScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreenViewController.swift; sourceTree = "<group>"; };
+		AB27649123EF679D0054DEBC /* SinglePingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePingViewController.swift; sourceTree = "<group>"; };
 		AB316C7023E3447400FB9D93 /* iOSPingerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSPingerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB316C7323E3447400FB9D93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB316C7523E3447400FB9D93 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,8 +111,10 @@
 		AB316C8A23E345B700FB9D93 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AB27648F23EF640F0054DEBC /* IntroScreenViewController.swift */,
 				AB6B34BA23E5764C00C97B95 /* PingResultTableViewController.swift */,
 				ABBA5BBA23E8CC8100C3C949 /* OptionsViewController.swift */,
+				AB27649123EF679D0054DEBC /* SinglePingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,10 +255,12 @@
 				ABBA5BBB23E8CC8100C3C949 /* OptionsViewController.swift in Sources */,
 				AB316C8E23E355B900FB9D93 /* PingBrain.swift in Sources */,
 				AB6B34BB23E5764C00C97B95 /* PingResultTableViewController.swift in Sources */,
+				AB27649223EF679D0054DEBC /* SinglePingViewController.swift in Sources */,
 				AB316C7423E3447400FB9D93 /* AppDelegate.swift in Sources */,
 				AB316C7623E3447400FB9D93 /* SceneDelegate.swift in Sources */,
 				AB72E95223E56B2A00C39081 /* PingResultTableViewCell.swift in Sources */,
 				ABA1DA8823E357A900685200 /* NetworkBrain.swift in Sources */,
+				AB27649023EF640F0054DEBC /* IntroScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
