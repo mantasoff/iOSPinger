@@ -78,7 +78,7 @@ class PingBrain{
     private func getNextReadyPingResultIndex() -> Int {
         for pingResult in pingResultArray! {
             if !pingResult.getIsConnected() && !pingResult.getIsRunning() && (pingResult.getTimesRan() < numberOfRetries) {
-                return getPingResultIndexInPingResultArray(pingResult: pingResult)
+                return getPingResultIndexInPingResultArray(pingResult)
             }
         }
         return -1
@@ -173,7 +173,7 @@ class PingBrain{
         return pingResultArray?.count ?? 0
     }
     
-    func setPingResultArray(pingResultArray: [PingResult]) {
+    func setPingResultArray(_ pingResultArray: [PingResult]) {
         self.pingResultArray = pingResultArray
     }
     
@@ -181,7 +181,7 @@ class PingBrain{
         return pingResultArray!
     }
     
-    func getPingResultIndexInPingResultArray(pingResult: PingResult) -> Int {
+    func getPingResultIndexInPingResultArray(_ pingResult: PingResult) -> Int {
         return pingResultArray?.firstIndex(of: pingResult) ?? -1
     }
     

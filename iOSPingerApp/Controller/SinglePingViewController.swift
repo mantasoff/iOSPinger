@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SinglePingViewController: UIViewController, UITextFieldDelegate {
+class SinglePingViewController: UIViewController{
     @IBOutlet weak var ipAddressTextField: UITextField!
     @IBOutlet weak var numberOfRetriesLabel: UILabel!
     @IBOutlet weak var numberOfTimeoutsLabel: UILabel!
@@ -35,17 +35,12 @@ class SinglePingViewController: UIViewController, UITextFieldDelegate {
             pingBrain = PingBrain()
         }
         let pingResult = PingResult(ipAddress: "", isConnected: false, pingBrain: pingBrain!)
-        setOnConnectionStatusChangedExtensionOnPingResult(pingResult: pingResult)
-        pingBrain?.setPingResultArray(pingResultArray: [pingResult])
+        setOnConnectionStatusChangedExtensionOnPingResult(pingResult)
+        pingBrain?.setPingResultArray([pingResult])
     }
     
-    private func setOnConnectionStatusChangedExtensionOnPingResult(pingResult: PingResult) {
+    private func setOnConnectionStatusChangedExtensionOnPingResult(_ pingResult: PingResult) {
         pingResult.onConnectionStatusChanged = self
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
     }
     
     //MARK: IBAction functions
@@ -69,6 +64,7 @@ class SinglePingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backBarButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     //MARK: Appearance
     private func setReachabilityLabelAppearance() {
         let pingResultArray = pingBrain?.getPingResultArray()
@@ -127,9 +123,17 @@ class SinglePingViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+//MARK: Extensions
 extension SinglePingViewController: onConnectionStatusChangedDelegate {
     func connectionStatusChanged(index: Int) {
         setReachabilityLabelAppearance()
         setPingButtonStatus()
+    }
+}
+
+extension SinglePingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

@@ -34,7 +34,7 @@ class PingResult : Equatable {
         reachability?.allowsCellularConnection = false
 
         isRunning = true
-        self.onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
+        self.onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(self))
         
         self.reachability?.whenReachable = { reachability in
             self.updatePingResultConnection(isConnected: true)
@@ -78,7 +78,7 @@ class PingResult : Equatable {
             self.pingBrain.runNextPing()
         }
         pingBrain.addToNumberOfFinishedEntriesAndSendNotification()
-        onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
+        onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(self))
     }
     
     //MARK: Equality Methods

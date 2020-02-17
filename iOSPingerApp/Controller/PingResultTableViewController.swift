@@ -166,7 +166,7 @@ class PingResultTableViewController: UITableViewController {
     }
 
     //MARK: Setup functions
-    private func setOnConnectionStatusChangedExtensionOnPingResultArray(pingResultArray: [PingResult]) {
+    private func setOnConnectionStatusChangedExtensionOnPingResultArray(_ pingResultArray: [PingResult]) {
         for pingResult in pingResultArray {
             pingResult.onConnectionStatusChanged = self
         }
@@ -178,8 +178,8 @@ class PingResultTableViewController: UITableViewController {
         }
         pingBrain?.generatePingResultArray()
         let pingResultArray = pingBrain!.getPingResultArray()
-        setOnConnectionStatusChangedExtensionOnPingResultArray(pingResultArray: pingResultArray)
-        pingBrain?.setPingResultArray(pingResultArray: pingResultArray)
+        setOnConnectionStatusChangedExtensionOnPingResultArray(pingResultArray)
+        pingBrain?.setPingResultArray(pingResultArray)
     }
     
     //MARK: Preparation for changing the UIView
