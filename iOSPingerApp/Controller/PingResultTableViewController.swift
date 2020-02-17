@@ -202,5 +202,3 @@ extension PingResultTableViewController: onConnectionStatusChangedDelegate {
         setProgressLabelValue(numberOfConnectedEntries: pingBrain!.getNumberOfConnectedEntries(), numberOfEntries: pingBrain!.getPingResultArrayCount())
     }
 }
-
-

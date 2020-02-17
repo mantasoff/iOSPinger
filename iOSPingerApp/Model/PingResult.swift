@@ -34,7 +34,7 @@ class PingResult : Equatable {
         reachability?.allowsCellularConnection = false
 
         isRunning = true
-        self.onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(self))
+        onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(self))
         
         self.reachability?.whenReachable = { reachability in
             self.updatePingResultConnection(isConnected: true)
@@ -65,17 +65,17 @@ class PingResult : Equatable {
     func updatePingResultConnection(isConnected: Bool) {
         self.isConnected = isConnected
         if self.isConnected {
-            self.isRunning = false
-            self.pingBrain.runNextPing()
-            self.pingBrain.addToNumberOfConnectedEntries()
+            isRunning = false
+            pingBrain.runNextPing()
+            pingBrain.addToNumberOfConnectedEntries()
         } else {
-            self.timesRan += 1
-            if self.pingBrain.isPossibleToRetryPing(pingResult: self) {
-                self.pingBrain.runPingOnPingResult(pingResult: self);
+            timesRan += 1
+            if pingBrain.isPossibleToRetryPing(pingResult: self) {
+                pingBrain.runPingOnPingResult(pingResult: self);
                 return
             }
-            self.isRunning = false
-            self.pingBrain.runNextPing()
+            isRunning = false
+            pingBrain.runNextPing()
         }
         pingBrain.addToNumberOfFinishedEntriesAndSendNotification()
         onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(self))

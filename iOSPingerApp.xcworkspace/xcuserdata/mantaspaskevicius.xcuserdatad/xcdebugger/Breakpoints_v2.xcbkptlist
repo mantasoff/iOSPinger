@@ -410,8 +410,8 @@
             filePath = "iOSPingerApp/Controller/SinglePingViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "setReachabilityLabelAppearance()"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,8 +458,8 @@
             filePath = "iOSPingerApp/Controller/SinglePingViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "pingButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
