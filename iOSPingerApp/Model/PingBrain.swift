@@ -125,22 +125,6 @@ class PingBrain{
     }
     
     //MARK: Getters and setters
-    func stopPinging() {
-        isStarted = false
-    }
-    
-    func checkIfIsStarted() -> Bool {
-        return isStarted
-    }
-    
-    func addToNumberOfFinishedEntriesAndSendNotification() {
-        numberOfFinishedEntries += 1
-        if numberOfFinishedEntries == pingResultArray!.count {
-            isStarted = false
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "co.mancio.pingsarefinished"), object: nil)
-        }
-    }
-    
     func getNumberOfFinishedEntries() -> Int {
         return numberOfFinishedEntries
     }
@@ -199,6 +183,22 @@ class PingBrain{
         }
         
         pingResultArray![index].setIpAddress(ipAddress: ipAddress)
+    }
+    
+    func stopPinging() {
+        isStarted = false
+    }
+    
+    func checkIfIsStarted() -> Bool {
+        return isStarted
+    }
+    
+    func addToNumberOfFinishedEntriesAndSendNotification() {
+        numberOfFinishedEntries += 1
+        if numberOfFinishedEntries == pingResultArray!.count {
+            isStarted = false
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "co.mancio.pingsarefinished"), object: nil)
+        }
     }
     
     func setDefaults() {

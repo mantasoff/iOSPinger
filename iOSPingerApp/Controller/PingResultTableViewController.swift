@@ -195,6 +195,7 @@ class PingResultTableViewController: UITableViewController {
     }
 }
 
+//MARK: Extensions
 extension PingResultTableViewController: onConnectionStatusChangedDelegate {
     func connectionStatusChanged(index: Int) {
         reloadRowByNumber(rowNumber: index)
