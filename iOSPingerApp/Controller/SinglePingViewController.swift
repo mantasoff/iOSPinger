@@ -29,7 +29,7 @@ class SinglePingViewController: UIViewController, UITextFieldDelegate {
         self.ipAddressTextField.delegate = self
     }
     
-    //=========================================================================== Setup funtions
+    //MARK: Setup funtions
     private func setupPingBrain() {
         if pingBrain == nil {
             pingBrain = PingBrain()
@@ -48,7 +48,7 @@ class SinglePingViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    //================================================================ IBAction functions
+    //MARK: IBAction functions
     @IBAction func numberOfRetriesStepperChanged(_ sender: UIStepper) {
         numberOfRetries = Int(sender.value)
         numberOfRetriesLabel.text = String(numberOfRetries!)
@@ -69,7 +69,7 @@ class SinglePingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backBarButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-    //================================================================= Appearance
+    //MARK: Appearance
     private func setReachabilityLabelAppearance() {
         let pingResultArray = pingBrain?.getPingResultArray()
         let pingResult = pingResultArray![0]

@@ -14,7 +14,6 @@ class IntroScreenViewController: UIViewController {
         super.viewDidLoad()
     }
     
-
     @IBAction func pingLocalNetworkPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "PingResultTableViewSegue", sender: self)
     }

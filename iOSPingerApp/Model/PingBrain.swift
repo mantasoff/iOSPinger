@@ -20,6 +20,7 @@ class PingBrain{
     private var numberOfFinishedEntries = 0
     private var numberOfConnectedEntries = 0
     
+    //MARK: Ping Methods
     func checkReachabilityOfPingResultArray() {
         if pingResultArray == nil {
             return
@@ -83,7 +84,7 @@ class PingBrain{
         return -1
     }
     
-    //================================ Sorting Functions
+    //MARK: Sorting Functions
     internal func sortPingResultArrayByReachabilityAscending() {
         if pingResultArray != nil {
             pingResultArray?.sort(by: { (PingResult1, PingResult2) -> Bool in
@@ -123,18 +124,7 @@ class PingBrain{
         }
     }
     
-    func setDefaults() {
-        for pingResult in pingResultArray! {
-            pingResult.setDefault()
-        }
-        numberOfRunningEntries = 0
-        isStarted = false
-        isPaused = false
-        numberOfFinishedEntries = 0
-        numberOfConnectedEntries = 0
-    }
-    
-    //================================ Getters and setters
+    //MARK: Getters and setters
     func stopPinging() {
         isStarted = false
     }
@@ -210,9 +200,20 @@ class PingBrain{
         
         pingResultArray![index].setIpAddress(ipAddress: ipAddress)
     }
+    
+    func setDefaults() {
+        for pingResult in pingResultArray! {
+            pingResult.setDefault()
+        }
+        numberOfRunningEntries = 0
+        isStarted = false
+        isPaused = false
+        numberOfFinishedEntries = 0
+        numberOfConnectedEntries = 0
+    }
 }
 
-//============================ Extension to make a call on the OptionViewController
+//MARK: Extension to make a call on the OptionViewController
 extension PingBrain: onOptionsSave {
     func changeTheOptions(numberOfThreads: Int, numberOfRetries: Int, timeOutSecods: Int) {
         allowedNumberOfRunningEntries = numberOfThreads

@@ -40,6 +40,7 @@ class OptionsViewController: UIViewController {
         setStepperInitialValues()
     }
     
+    //MARK: IBActions
     @IBAction func numberOfThreadsStepperChanged(_ sender: UIStepper) {
         numberOfThreads = Int(sender.value)
         numberOfThreadsLabel.text = String(numberOfThreads!)
@@ -83,6 +84,7 @@ class OptionsViewController: UIViewController {
         onOptionsSaved.buttonPressedSortPingResultArrayByReachabilityDescending()
     }
     
+    //MARK: Setters
     private func setInitialValues() {
         numberOfThreadsLabel.text = String(numberOfThreads!)
         numberOfRetriesLabel.text = String(numberOfRetries!)
@@ -101,7 +103,6 @@ class OptionsViewController: UIViewController {
         timeoutSecondsStepper.value = Double(timeOutSeconds ?? 1)
     }
     
-    //============================================================ Setters
     func setNumberOfThreads(numberOfThreads: Int) {
         self.numberOfThreads = numberOfThreads
     }

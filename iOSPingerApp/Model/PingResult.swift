@@ -81,6 +81,7 @@ class PingResult : Equatable {
         onConnectionStatusChanged.connectionStatusChanged(index: pingBrain.getPingResultIndexInPingResultArray(pingResult: self))
     }
     
+    //MARK: Equality Methods
     static func ==(lhs: PingResult, rhs: PingResult) -> Bool {
         return lhs.isEqual(to: rhs)
     }
@@ -89,7 +90,7 @@ class PingResult : Equatable {
         return((ipAddress == to.ipAddress) && (isConnected == to.isConnected) && (timesRan == to.timesRan))
     }
     
-    //============================ Getters and Setters
+    //MARK: Getters and Setters
     func getIsRunning() -> Bool {
         return isRunning
     }

@@ -364,7 +364,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="N7T-DJ-Eel">
                         <nil key="title"/>
-                        <progressView key="titleView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" id="nMY-cr-v2v">
+                        <progressView key="titleView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" id="nMY-cr-v2v">
                             <rect key="frame" x="12" y="21" width="390" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </progressView>

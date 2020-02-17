@@ -42,7 +42,7 @@ class PingResultTableViewController: UITableViewController {
         return cell
     }
       
-    //==================================================== Button Action functions
+    //MARK: Button Action functions
     @IBAction func backButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "backToIntro", sender: self)
     }
@@ -69,7 +69,7 @@ class PingResultTableViewController: UITableViewController {
         performSegue(withIdentifier: "OptionSegue", sender: self)
     }
 
-    //==================================================== Functions associated with changing the UI
+    //MARK: Functions associated with changing the UI
     private func setLeftNavigationButtonToStart() {
         navigationItem.leftBarButtonItem?.title = "Start"
     }
@@ -150,13 +150,13 @@ class PingResultTableViewController: UITableViewController {
         }
     }
     
-    //================================================ Notification Observers
+    //MARK: Notification Observers
     private func setObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(setPingsFinished), name: NSNotification.Name(rawValue: "co.mancio.pingsarefinished"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setNoInternetConnection), name: NSNotification.Name(rawValue: "co.mancio.nointernetconnection"), object: nil)
     }
     
-    //================================================ Notification Observer Functions
+    //MARK: Notification Observer Functions
     @objc private func setPingsFinished() {
         setLeftNavigationButtonAppearance()
     }
@@ -165,7 +165,7 @@ class PingResultTableViewController: UITableViewController {
         progressLabel.text = "Please Check Your Connection"
     }
 
-    //================================================ Setup functions
+    //MARK: Setup functions
     private func setOnConnectionStatusChangedExtensionOnPingResultArray(pingResultArray: [PingResult]) {
         for pingResult in pingResultArray {
             pingResult.onConnectionStatusChanged = self
@@ -182,7 +182,7 @@ class PingResultTableViewController: UITableViewController {
         pingBrain?.setPingResultArray(pingResultArray: pingResultArray)
     }
     
-    //================================================ Preparation for changing the UIView
+    //MARK: Preparation for changing the UIView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "OptionSegue" {
             let optionsViewController = segue.destination as! OptionsViewController
